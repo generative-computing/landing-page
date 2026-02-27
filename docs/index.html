@@ -404,6 +404,31 @@
       display: inline-block;
     }
 
+    .project-pulse {
+      display: none;
+      flex-wrap: wrap;
+      gap: 0.25rem 0;
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+    }
+
+    .project-pulse.loaded {
+      display: flex;
+    }
+
+    .project-pulse .pulse-item {
+      display: none;
+    }
+
+    .project-pulse .pulse-item.loaded {
+      display: inline;
+    }
+
+    .project-pulse .pulse-sep {
+      display: none;
+      margin: 0 0.5rem;
+    }
+
     /* ==========================================================================
        FRAMEWORK SECTION
        ========================================================================== */
@@ -1015,6 +1040,13 @@
                 <span class="github-stars" id="github-stars"></span>
               </a>
             </div>
+            <div class="project-pulse" id="project-pulse">
+              <span class="pulse-item" id="pulse-release"></span>
+              <span class="pulse-sep" id="pulse-sep-1">&middot;</span>
+              <span class="pulse-item" id="pulse-commit"></span>
+              <span class="pulse-sep" id="pulse-sep-2">&middot;</span>
+              <span class="pulse-item" id="pulse-contributors"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -1547,10 +1579,41 @@ print(str(answer))`
   });
 
   // ==========================================================================
-  // FETCH GITHUB STARS & PYPI VERSION
+  // FETCH GITHUB STARS, PYPI VERSION & PROJECT PULSE
   // ==========================================================================
   (function fetchProjectMeta() {
-    fetch('https://api.github.com/repos/generative-computing/mellea')
+    const REPO = 'generative-computing/mellea';
+    const pulse = document.getElementById('project-pulse');
+
+    function timeAgo(dateStr) {
+      const seconds = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
+      const intervals = [
+        [31536000, 'year'], [2592000, 'month'], [604800, 'week'],
+        [86400, 'day'], [3600, 'hour'], [60, 'minute']
+      ];
+      for (const [secs, label] of intervals) {
+        const count = Math.floor(seconds / secs);
+        if (count >= 1) return count === 1 ? `1 ${label} ago` : `${count} ${label}s ago`;
+      }
+      return 'just now';
+    }
+
+    function showPulseItem(id, text) {
+      const el = document.getElementById(id);
+      el.textContent = text;
+      el.classList.add('loaded');
+    }
+
+    function updateSeparators() {
+      const items = pulse.querySelectorAll('.pulse-item.loaded');
+      pulse.querySelectorAll('.pulse-sep').forEach(s => s.style.display = 'none');
+      if (items.length >= 2) document.getElementById('pulse-sep-1').style.display = '';
+      if (items.length >= 3) document.getElementById('pulse-sep-2').style.display = '';
+      if (items.length > 0) pulse.classList.add('loaded');
+    }
+
+    // Stars
+    fetch(`https://api.github.com/repos/${REPO}`)
       .then(r => r.json())
       .then(data => {
         if (data.stargazers_count != null) {
@@ -1562,6 +1625,7 @@ print(str(answer))`
       })
       .catch(() => {});
 
+    // PyPI version
     fetch('https://pypi.org/pypi/mellea/json')
       .then(r => r.json())
       .then(data => {
@@ -1569,6 +1633,39 @@ print(str(answer))`
           const el = document.getElementById('pypi-version');
           el.textContent = 'v' + data.info.version;
           el.classList.add('loaded');
+        }
+      })
+      .catch(() => {});
+
+    // Latest release + date
+    fetch(`https://api.github.com/repos/${REPO}/releases/latest`)
+      .then(r => r.json())
+      .then(data => {
+        if (data.tag_name && data.published_at) {
+          showPulseItem('pulse-release', `${data.tag_name} released ${timeAgo(data.published_at)}`);
+          updateSeparators();
+        }
+      })
+      .catch(() => {});
+
+    // Last commit
+    fetch(`https://api.github.com/repos/${REPO}/commits?per_page=1`)
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data) && data[0]?.commit?.committer?.date) {
+          showPulseItem('pulse-commit', `last commit ${timeAgo(data[0].commit.committer.date)}`);
+          updateSeparators();
+        }
+      })
+      .catch(() => {});
+
+    // Contributors count
+    fetch(`https://api.github.com/repos/${REPO}/contributors?per_page=100&anon=true`)
+      .then(r => r.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          showPulseItem('pulse-contributors', `${data.length} contributors`);
+          updateSeparators();
         }
       })
       .catch(() => {});
