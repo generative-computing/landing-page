@@ -1690,8 +1690,8 @@ print(str(answer))`
     function updateSeparators() {
       const items = pulse.querySelectorAll('.pulse-item.loaded');
       pulse.querySelectorAll('.pulse-sep').forEach(s => s.style.display = 'none');
-      if (items.length >= 2) document.getElementById('pulse-sep-1').style.display = '';
-      if (items.length >= 3) document.getElementById('pulse-sep-2').style.display = '';
+      if (items.length >= 2) document.getElementById('pulse-sep-1').style.display = 'inline';
+      if (items.length >= 3) document.getElementById('pulse-sep-2').style.display = 'inline';
       if (items.length > 0) pulse.classList.add('loaded');
     }
 
