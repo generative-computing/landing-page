@@ -429,6 +429,85 @@
       margin: 0 0.5rem;
     }
 
+    .contributor-avatars {
+      display: none;
+      align-items: center;
+      gap: 0;
+      margin-top: var(--spacing-xs);
+    }
+
+    .contributor-avatars.loaded {
+      display: flex;
+    }
+
+    .contributor-avatars a {
+      display: block;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--color-background);
+      margin-left: -0.5rem;
+      transition: transform 0.15s;
+    }
+
+    .contributor-avatars a:first-child {
+      margin-left: 0;
+    }
+
+    .contributor-avatars a:hover {
+      transform: translateY(-2px);
+      z-index: 1;
+    }
+
+    .contributor-avatars img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .contributor-avatars .avatar-more {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: var(--color-surface);
+      border: 2px solid var(--color-background);
+      margin-left: -0.5rem;
+      font-size: 0.625rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+    }
+
+    .activity-sparkline {
+      display: none;
+      align-items: flex-end;
+      gap: 1px;
+      height: 1.5rem;
+      margin-top: var(--spacing-xs);
+    }
+
+    .activity-sparkline.loaded {
+      display: inline-flex;
+    }
+
+    .activity-sparkline .spark-bar {
+      width: 3px;
+      background: var(--color-text-muted);
+      border-radius: 1px;
+      opacity: 0.6;
+      min-height: 2px;
+    }
+
+    .activity-sparkline .spark-label {
+      font-size: 0.6875rem;
+      color: var(--color-text-muted);
+      margin-left: 0.5rem;
+      align-self: center;
+    }
+
     /* ==========================================================================
        FRAMEWORK SECTION
        ========================================================================== */
@@ -1047,6 +1126,10 @@
               <span class="pulse-sep" id="pulse-sep-2">&middot;</span>
               <span class="pulse-item" id="pulse-contributors"></span>
             </div>
+            <div style="display: flex; align-items: center; flex-wrap: wrap; gap: var(--spacing-sm);">
+              <div class="contributor-avatars" id="contributor-avatars"></div>
+              <div class="activity-sparkline" id="activity-sparkline"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1659,14 +1742,76 @@ print(str(answer))`
       })
       .catch(() => {});
 
-    // Contributors count
+    // Contributors count + avatars
     fetch(`https://api.github.com/repos/${REPO}/contributors?per_page=100&anon=true`)
       .then(r => r.json())
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {
           showPulseItem('pulse-contributors', `${data.length} contributors`);
           updateSeparators();
+
+          // Render top contributor avatars
+          const container = document.getElementById('contributor-avatars');
+          const maxAvatars = 12;
+          const named = data.filter(c => c.login && c.avatar_url);
+          const shown = named.slice(0, maxAvatars);
+          const remaining = data.length - shown.length;
+
+          shown.forEach(c => {
+            const a = document.createElement('a');
+            a.href = c.html_url;
+            a.target = '_blank';
+            a.rel = 'noreferrer';
+            a.title = c.login;
+            const img = document.createElement('img');
+            img.src = c.avatar_url + '&s=64';
+            img.alt = c.login;
+            img.loading = 'lazy';
+            a.appendChild(img);
+            container.appendChild(a);
+          });
+
+          if (remaining > 0) {
+            const more = document.createElement('span');
+            more.className = 'avatar-more';
+            more.textContent = '+' + remaining;
+            container.appendChild(more);
+          }
+
+          container.classList.add('loaded');
         }
+      })
+      .catch(() => {});
+
+    // Commit activity sparkline (last 12 weeks)
+    fetch(`https://api.github.com/repos/${REPO}/stats/commit_activity`)
+      .then(r => {
+        if (r.status === 202) return null; // GitHub is computing, skip gracefully
+        return r.json();
+      })
+      .then(data => {
+        if (!Array.isArray(data) || data.length === 0) return;
+
+        const container = document.getElementById('activity-sparkline');
+        const weeks = data.slice(-12);
+        const max = Math.max(...weeks.map(w => w.total), 1);
+
+        weeks.forEach(week => {
+          const bar = document.createElement('span');
+          bar.className = 'spark-bar';
+          const height = Math.max(2, (week.total / max) * 24);
+          bar.style.height = height + 'px';
+          if (week.total > 0) bar.style.opacity = '1';
+          container.appendChild(bar);
+        });
+
+        const total = weeks.reduce((sum, w) => sum + w.total, 0);
+        const label = document.createElement('span');
+        label.className = 'spark-label';
+        label.textContent = `${total} commits / 12 weeks`;
+        container.appendChild(label);
+
+        container.classList.add('loaded');
       })
       .catch(() => {});
   })();
