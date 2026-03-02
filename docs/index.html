@@ -1239,7 +1239,8 @@
                 <span>build reliable AI with Python</span>
               </h1>
               <p class="hero-subtext">LLM apps built on raw prompts break silently, resist testing, and can't be
-                composed. Mellea gives you programming abstractions that make generative AI predictable.</p>
+                composed. Frameworks add complexity without reliability. Mellea gives you programming abstractions that
+                make generative AI predictable — no chains, no graphs, just Python.</p>
               <div class="hero-actions">
                 <button class="copy-snippet" onclick="copyToClipboard(this, 'uv pip install mellea')">
                   <span>uv pip install mellea</span> <span class="version-tag" id="pypi-version"></span>
@@ -1320,7 +1321,8 @@
                 </svg>
                 <div class="feature-text">
                   <strong>Python not Prose</strong>
-                  <span>Define LLM behavior with typed functions and classes, not fragile prompt strings.</span>
+                  <span>The <code>@generative</code> decorator turns typed function signatures into LLM specifications.
+                    Docstrings are prompts, type hints are schemas — no templates, no parsers.</span>
                 </div>
               </li>
               <li class="feature-item">
@@ -1356,8 +1358,8 @@
                 </svg>
                 <div class="feature-text">
                   <strong>Predictable and Resilient</strong>
-                  <span>Built-in sampling strategies retry and repair bad generations automatically, so failures don't
-                    reach production.</span>
+                  <span>Pluggable sampling strategies — rejection sampling, majority voting, budget forcing — swap with
+                    one parameter. Add reliability without rewriting your code.</span>
                 </div>
               </li>
               <li class="feature-item">
@@ -1372,7 +1374,8 @@
                 <div class="feature-text">
                   <strong>MCP Compatible</strong>
                   <span>Expose any Mellea program as an MCP tool. Works with OpenAI, Ollama, Hugging Face, Watsonx,
-                    vLLM, LiteLLM, and Bedrock.</span>
+                    vLLM, LiteLLM, and Bedrock — with constrained decoding for guaranteed valid JSON from local
+                    models.</span>
                 </div>
               </li>
             </ul>
@@ -1391,8 +1394,58 @@
 
               <div class="accordion" id="accordion">
 
-                <!-- Accordion Item 1 -->
-                <div class="accordion-item active" data-snippet="instruct-validate-repair">
+                <!-- Accordion Item 1: Generative Slots (Layer 1 — entry point) -->
+                <div class="accordion-item active" data-snippet="generative-slots">
+                  <button class="accordion-header" type="button">
+                    Generative Slots
+                    <svg class="accordion-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M16 6v20M6 16h20" />
+                    </svg>
+                  </button>
+                  <div class="accordion-content">
+                    <p class="accordion-description">Write a typed Python function, get structured LLM output.
+                      Docstrings are prompts, type hints are schemas — no parsers, no chains.</p>
+                    <a href="https://docs.mellea.ai/core-concept/generative-slots" target="_blank" rel="noreferrer"
+                      class="learn-more">
+                      Learn more
+                      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 16h20M18 8l8 8-8 8" />
+                      </svg>
+                    </a>
+                    <div class="snippet-mobile">
+                      <div class="code-block">
+                        <button class="code-copy-btn" onclick="copyCodeBlock(this)" aria-label="Copy code">
+                          <svg class="icon-copy" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="10" y="10" width="14" height="14" rx="1" />
+                            <path d="M22 10V8a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h2" />
+                          </svg>
+                          <svg class="icon-check" viewBox="0 0 32 32" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M8 16l6 6 10-12" />
+                          </svg>
+                        </button>
+                        <pre><code class="language-python">@mellea.generative
+def classify_sentiment(text: str) -> Literal["positive", "negative"]:
+  """Classify the sentiment of the input text as 'positive' or 'negative'."""
+
+sentiment = classify_sentiment(m, text=customer_review)
+
+if sentiment == "positive":
+    msg = m.instruct("Thank the customer for their post")
+else:
+    msg = m.instruct(
+       description="Apologize for the customer's negative experience and offer a 5% discount for their next visit",
+       grounding_context={"review": customer_review}
+    )
+
+post_response(msg)</code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Accordion Item 2: Instruct, Validate, Repair (Layer 2 — robustness) -->
+                <div class="accordion-item" data-snippet="instruct-validate-repair">
                   <button class="accordion-header" type="button">
                     Instruct, Validate, Repair
                     <svg class="accordion-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
@@ -1400,8 +1453,9 @@
                     </svg>
                   </button>
                   <div class="accordion-content">
-                    <p class="accordion-description">Clean interfaces for Gen AI output validation and sampling
-                      strategies.</p>
+                    <p class="accordion-description">Add requirements to any LLM call. Mellea validates outputs and
+                      retries automatically — swap between rejection sampling, majority voting, or budget forcing with
+                      one parameter.</p>
                     <a href="https://docs.mellea.ai/overview/requirements" target="_blank" rel="noreferrer"
                       class="learn-more">
                       Learn more
@@ -1442,55 +1496,6 @@ def write_email_with_strategy(m: mellea.MelleaSession, name: str, notes: str) ->
     # If sampling fails, use the first generation
     print("Expect sub-par result.")
     return email_candidate.sample_generations[0].value</code></pre>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Accordion Item 2 -->
-                <div class="accordion-item" data-snippet="generative-slots">
-                  <button class="accordion-header" type="button">
-                    Generative Slots
-                    <svg class="accordion-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M16 6v20M6 16h20" />
-                    </svg>
-                  </button>
-                  <div class="accordion-content">
-                    <p class="accordion-description">Build composable Gen AI using tried-and-true abstractions.</p>
-                    <a href="https://docs.mellea.ai/core-concept/generative-slots" target="_blank" rel="noreferrer"
-                      class="learn-more">
-                      Learn more
-                      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M6 16h20M18 8l8 8-8 8" />
-                      </svg>
-                    </a>
-                    <div class="snippet-mobile">
-                      <div class="code-block">
-                        <button class="code-copy-btn" onclick="copyCodeBlock(this)" aria-label="Copy code">
-                          <svg class="icon-copy" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="10" y="10" width="14" height="14" rx="1" />
-                            <path d="M22 10V8a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h2" />
-                          </svg>
-                          <svg class="icon-check" viewBox="0 0 32 32" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M8 16l6 6 10-12" />
-                          </svg>
-                        </button>
-                        <pre><code class="language-python">@mellea.generative
-def classify_sentiment(text: str) -> Literal["positive", "negative"]:
-  """Classify the sentiment of the input text as 'positive' or 'negative'."""
-
-sentiment = classify_sentiment(m, text=customer_review)
-
-if sentiment == "positive":
-    msg = m.instruct("Thank the customer for their post")
-else:
-    msg = m.instruct(
-       description="Apologize for the customer's negative experience and offer a 5% discount for their next visit",
-       grounding_context={"review": customer_review}
-    )
-
-post_response(msg)</code></pre>
                       </div>
                     </div>
                   </div>
@@ -1573,27 +1578,21 @@ print(str(answer))</code></pre>
                       <path d="M8 16l6 6 10-12" />
                     </svg>
                   </button>
-                  <pre><code class="language-python" id="desktop-code">import mellea
-from mellea.stdlib.sampling import RejectionSamplingStrategy
+                  <pre><code class="language-python" id="desktop-code">@mellea.generative
+def classify_sentiment(text: str) -> Literal["positive", "negative"]:
+  """Classify the sentiment of the input text as 'positive' or 'negative'."""
 
+sentiment = classify_sentiment(m, text=customer_review)
 
-def write_email_with_strategy(m: mellea.MelleaSession, name: str, notes: str) -> str:
-    email_candidate = m.instruct(
-        f"Write an email to {name} using the notes following: {notes}.",
-        requirements=[
-            "The email should have a salutation.",
-            "Use a formal tone.",
-        ],
-        strategy=RejectionSamplingStrategy(loop_budget=3),
-        return_sampling_results=True,
+if sentiment == "positive":
+    msg = m.instruct("Thank the customer for their post")
+else:
+    msg = m.instruct(
+       description="Apologize for the customer's negative experience and offer a 5% discount for their next visit",
+       grounding_context={"review": customer_review}
     )
 
-    if email_candidate.success:
-        return str(email_candidate.result)
-
-    # If sampling fails, use the first generation
-    print("Expect sub-par result.")
-    return email_candidate.sample_generations[0].value</code></pre>
+post_response(msg)</code></pre>
                 </div>
               </div>
 
@@ -1619,6 +1618,10 @@ def write_email_with_strategy(m: mellea.MelleaSession, name: str, notes: str) ->
               </li>
               <li><a href="https://docs.mellea.ai" target="_blank" rel="noreferrer">Docs</a></li>
               <li><a href="https://generative-computing.github.io/blog/" target="_blank" rel="noreferrer">Blog</a></li>
+              <li><a href="https://thenewstack.io/ibms-mellea-tackles-open-source-ais-hidden-weakness/" target="_blank"
+                  rel="noreferrer">Press</a></li>
+              <li><a href="https://www.youtube.com/watch?v=WFm0nao9hlY" target="_blank" rel="noreferrer">PyData Talk</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -1634,6 +1637,22 @@ def write_email_with_strategy(m: mellea.MelleaSession, name: str, notes: str) ->
     // CODE SNIPPETS DATA - Edit these to change code examples
     // ==========================================================================
     const CODE_SNIPPETS = {
+      'generative-slots': `@mellea.generative
+def classify_sentiment(text: str) -> Literal["positive", "negative"]:
+  """Classify the sentiment of the input text as 'positive' or 'negative'."""
+
+sentiment = classify_sentiment(m, text=customer_review)
+
+if sentiment == "positive":
+    msg = m.instruct("Thank the customer for their post")
+else:
+    msg = m.instruct(
+       description="Apologize for the customer's negative experience and offer a 5% discount for their next visit",
+       grounding_context={"review": customer_review}
+    )
+
+post_response(msg)`,
+
       'instruct-validate-repair': `import mellea
 from mellea.stdlib.sampling import RejectionSamplingStrategy
 
@@ -1655,22 +1674,6 @@ def write_email_with_strategy(m: mellea.MelleaSession, name: str, notes: str) ->
     # If sampling fails, use the first generation
     print("Expect sub-par result.")
     return email_candidate.sample_generations[0].value`,
-
-      'generative-slots': `@mellea.generative
-def classify_sentiment(text: str) -> Literal["positive", "negative"]:
-  """Classify the sentiment of the input text as 'positive' or 'negative'."""
-
-sentiment = classify_sentiment(m, text=customer_review)
-
-if sentiment == "positive":
-    msg = m.instruct("Thank the customer for their post")
-else:
-    msg = m.instruct(
-       description="Apologize for the customer's negative experience and offer a 5% discount for their next visit",
-       grounding_context={"review": customer_review}
-    )
-
-post_response(msg)`,
 
       'mobjects': `import mellea
 from mellea.stdlib.mify import mify, MifiedProtocol
