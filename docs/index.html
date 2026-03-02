@@ -6,13 +6,14 @@
   <title>Mellea - A Python Library for Generative Programs</title>
   <meta name="description" content="Mellea is an open-source Python library for writing generative programs. Replace flaky agents and brittle prompts with structured, maintainable, and resilient AI workflows.">
   <meta name="theme-color" content="#161616">
+  <link rel="canonical" href="https://mellea.ai/">
   <link rel="icon" href="mellea-logo.svg">
   <link rel="shortcut icon" href="mellea-logo.svg">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Mellea - A Python Library for Generative Programs">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://generative-computing.github.io/landing-page/">
+  <meta property="og:url" content="https://mellea.ai/">
   <meta property="og:description" content="An open-source Python library for writing generative programs. Replace flaky agents and brittle prompts with structured, maintainable, and resilient AI workflows.">
   <meta property="og:site_name" content="Mellea">
   <meta property="og:image" content="https://raw.githubusercontent.com/generative-computing/docs/main/images/hero-dark.png">
@@ -23,6 +24,10 @@
 
   <!-- X/Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mellea - A Python Library for Generative Programs">
+  <meta name="twitter:description" content="An open-source Python library for writing generative programs. Replace flaky agents and brittle prompts with structured, maintainable, and resilient AI workflows.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/generative-computing/docs/main/images/hero-dark.png">
+  <meta name="twitter:image:alt" content="Mellea logo on dark green background">
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -35,7 +40,7 @@
     "programmingLanguage": "Python",
     "runtimePlatform": "Python 3.12+",
     "license": "https://spdx.org/licenses/Apache-2.0",
-    "url": "https://generative-computing.github.io/landing-page/",
+    "url": "https://mellea.ai/",
     "keywords": ["generative-ai", "llm", "agents", "prompt-engineering", "structured-output", "python", "mcp", "inference-scaling", "generative-computing"],
     "applicationCategory": "DeveloperApplication",
     "author": {
@@ -44,6 +49,10 @@
     }
   }
   </script>
+
+  <!-- Preload hero images -->
+  <link rel="preload" as="image" href="without-mellea.png">
+  <link rel="preload" as="image" href="with-mellea.png">
 
   <!-- Google Fonts - IBM Plex Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1048,6 +1057,9 @@
 </head>
 <body>
 
+<!-- Skip to content -->
+<a href="#main-content" class="sr-only" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" onfocus="this.style.cssText='position:fixed;top:0;left:0;z-index:9999;padding:0.75rem 1.5rem;background:var(--color-accent);color:#fff;font-size:1rem;text-decoration:none;'" onblur="this.style.cssText='position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;'">Skip to main content</a>
+
 <!-- ==========================================================================
      HEADER
      ========================================================================== -->
@@ -1070,6 +1082,11 @@
             </svg>
           </a>
         </nav>
+        <button class="nav-toggle" aria-label="Toggle navigation menu" onclick="document.getElementById('main-nav').classList.toggle('open')">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 8h24M4 16h24M4 24h24"/>
+          </svg>
+        </button>
       </div>
       <ul class="social-links">
         <li>
@@ -1088,7 +1105,7 @@
 <!-- ==========================================================================
      MAIN CONTENT
      ========================================================================== -->
-<main>
+<main id="main-content">
 
   <!-- Hero / Introduction Section -->
   <section class="hero">
@@ -1229,7 +1246,7 @@
                 </button>
                 <div class="accordion-content">
                   <p class="accordion-description">Clean interfaces for Gen AI output validation and sampling strategies.</p>
-                  <a href="https://github.com/generative-computing/mellea/blob/main/docs/tutorial.md#instruct---validate---repair" target="_blank" rel="noreferrer" class="learn-more">
+                  <a href="https://docs.mellea.ai/overview/requirements" target="_blank" rel="noreferrer" class="learn-more">
                     Learn more
                     <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M6 16h20M18 8l8 8-8 8"/>
@@ -1282,7 +1299,7 @@ def write_email_with_strategy(m: mellea.MelleaSession, name: str, notes: str) ->
                 </button>
                 <div class="accordion-content">
                   <p class="accordion-description">Build composable Gen AI using tried-and-true abstractions.</p>
-                  <a href="https://github.com/generative-computing/mellea/blob/main/docs/tutorial.md#chapter-4-generative-slots" target="_blank" rel="noreferrer" class="learn-more">
+                  <a href="https://docs.mellea.ai/core-concept/generative-slots" target="_blank" rel="noreferrer" class="learn-more">
                     Learn more
                     <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M6 16h20M18 8l8 8-8 8"/>
@@ -1329,7 +1346,7 @@ post_response(msg)</code></pre>
                 </button>
                 <div class="accordion-content">
                   <p class="accordion-description">Seamlessly sprinkle GenAI into existing systems.</p>
-                  <a href="https://github.com/generative-computing/mellea/blob/main/docs/tutorial.md#chapter-5-mobjects" target="_blank" rel="noreferrer" class="learn-more">
+                  <a href="https://docs.mellea.ai/core-concept/mobjects" target="_blank" rel="noreferrer" class="learn-more">
                     Learn more
                     <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M6 16h20M18 8l8 8-8 8"/>
