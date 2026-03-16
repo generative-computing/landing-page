@@ -1266,6 +1266,13 @@
                   GitHub
                   <span class="github-stars" id="github-stars"></span>
                 </a>
+                <a href="https://docs.mellea.ai/getting-started/installation" target="_blank" rel="noreferrer"
+                  style="display:inline-flex;align-items:center;gap:0.25rem;font-size:0.875rem;color:var(--color-text-secondary);padding:0.75rem 0.25rem;">
+                  Quick Start
+                  <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                    <path d="M6 16h20M18 8l8 8-8 8" />
+                  </svg>
+                </a>
               </div>
               <div class="project-pulse" id="project-pulse">
                 <span class="pulse-item" id="pulse-release"></span>
@@ -1296,7 +1303,7 @@
                 <p>Replace flaky agents and brittle prompts with structured, testable Python. Mellea lets you instruct
                   LLMs, validate outputs against your requirements, and recover from failures automatically. Works
                   across OpenAI, Ollama, vLLM, HuggingFace, Watsonx, LiteLLM, and Bedrock.</p>
-                <a href="https://docs.mellea.ai/overview/quick-start" target="_blank" rel="noreferrer"
+                <a href="https://docs.mellea.ai/getting-started/installation" target="_blank" rel="noreferrer"
                   class="btn-primary">
                   Get started
                   <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
@@ -1331,6 +1338,28 @@
                   <strong>Python not Prose</strong>
                   <span>The <code>@generative</code> decorator turns typed function signatures into LLM specifications.
                     Docstrings are prompts, type hints are schemas — no templates, no parsers.</span>
+                  <a href="https://docs.mellea.ai/concepts/generative-functions" target="_blank" rel="noreferrer" class="learn-more">
+                    Learn more
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 16h20M18 8l8 8-8 8" /></svg>
+                  </a>
+                </div>
+              </li>
+              <li class="feature-item">
+                <!-- Lock Icon -->
+                <svg focusable="false" preserveAspectRatio="xMidYMid meet" fill="currentColor" width="16" height="16"
+                  viewBox="0 0 32 32" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M24,14H22V10a6,6,0,0,0-12,0v4H8a2,2,0,0,0-2,2V28a2,2,0,0,0,2,2H24a2,2,0,0,0,2-2V16A2,2,0,0,0,24,14ZM16,24a2,2,0,1,1,2-2A2,2,0,0,1,16,24Zm4-10H12V10a4,4,0,0,1,8,0Z">
+                  </path>
+                </svg>
+                <div class="feature-text">
+                  <strong>Constrained Decoding</strong>
+                  <span>Grammar-constrained generation for Ollama, vLLM, and HuggingFace. Unlike Instructor and
+                    PydanticAI, valid output is enforced at the token level — not retried into existence.</span>
+                  <a href="https://docs.mellea.ai/how-to/enforce-structured-output" target="_blank" rel="noreferrer" class="learn-more">
+                    Learn more
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 16h20M18 8l8 8-8 8" /></svg>
+                  </a>
                 </div>
               </li>
               <li class="feature-item">
@@ -1346,8 +1375,12 @@
                 </svg>
                 <div class="feature-text">
                   <strong>Requirements Driven</strong>
-                  <span>Attach verifiable requirements to every LLM call. Mellea checks outputs before your users see
-                    them.</span>
+                  <span>Define rules for any LLM call. Mellea validates outputs against them and retries
+                    automatically — bad output never reaches your users.</span>
+                  <a href="https://docs.mellea.ai/concepts/requirements-system" target="_blank" rel="noreferrer" class="learn-more">
+                    Learn more
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 16h20M18 8l8 8-8 8" /></svg>
+                  </a>
                 </div>
               </li>
               <li class="feature-item">
@@ -1368,6 +1401,10 @@
                   <strong>Predictable and Resilient</strong>
                   <span>Pluggable sampling strategies — rejection sampling, majority voting, inference-time scaling.
                     One parameter change. No rewrites.</span>
+                  <a href="https://docs.mellea.ai/advanced/inference-time-scaling" target="_blank" rel="noreferrer" class="learn-more">
+                    Learn more
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 16h20M18 8l8 8-8 8" /></svg>
+                  </a>
                 </div>
               </li>
               <li class="feature-item">
@@ -1383,26 +1420,16 @@
                   <strong>MCP Compatible</strong>
                   <span>Expose any Mellea program as an MCP tool. The calling agent gets validated output —
                     requirements checked, retries run — not raw LLM responses.</span>
-                </div>
-              </li>
-              <li class="feature-item">
-                <!-- Lock Icon -->
-                <svg focusable="false" preserveAspectRatio="xMidYMid meet" fill="currentColor" width="16" height="16"
-                  viewBox="0 0 32 32" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M24,14H22V10a6,6,0,0,0-12,0v4H8a2,2,0,0,0-2,2V28a2,2,0,0,0,2,2H24a2,2,0,0,0,2-2V16A2,2,0,0,0,24,14ZM16,24a2,2,0,1,1,2-2A2,2,0,0,1,16,24Zm4-10H12V10a4,4,0,0,1,8,0Z">
-                  </path>
-                </svg>
-                <div class="feature-text">
-                  <strong>Constrained Decoding</strong>
-                  <span>Grammar-constrained generation for Ollama, vLLM, and HuggingFace. Unlike Instructor and
-                    PydanticAI, valid output is enforced at the token level — not retried into existence.</span>
+                  <a href="https://docs.mellea.ai/integrations/mcp" target="_blank" rel="noreferrer" class="learn-more">
+                    Learn more
+                    <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 16h20M18 8l8 8-8 8" /></svg>
+                  </a>
                 </div>
               </li>
             </ul>
 
             <div style="margin-top: var(--spacing-xl);">
-              <a href="https://docs.mellea.ai/overview/quick-start" target="_blank" rel="noreferrer"
+              <a href="https://docs.mellea.ai/getting-started/installation" target="_blank" rel="noreferrer"
                 class="btn-primary">
                 Get started
                 <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
@@ -1426,10 +1453,10 @@
               <div class="accordion" id="accordion">
                 <h2 style="font-size: 1.5rem; font-weight: 600; margin-bottom: var(--spacing-md);">See it in action</h2>
 
-                <!-- Accordion Item 1: Generative Slots (Layer 1 — entry point) -->
-                <div class="accordion-item active" data-snippet="generative-slots">
+                <!-- Accordion Item 1: Generative Functions (Layer 1 — entry point) -->
+                <div class="accordion-item active" data-snippet="generative-functions">
                   <button class="accordion-header" type="button">
-                    Generative Slots
+                    Generative Functions
                     <svg class="accordion-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M16 6v20M6 16h20" />
                     </svg>
@@ -1437,7 +1464,7 @@
                   <div class="accordion-content">
                     <p class="accordion-description">Write a typed Python function, get structured LLM output.
                       Docstrings are prompts, type hints are schemas — no parsers, no chains.</p>
-                    <a href="https://docs.mellea.ai/core-concept/generative-slots" target="_blank" rel="noreferrer"
+                    <a href="https://docs.mellea.ai/concepts/generative-functions" target="_blank" rel="noreferrer"
                       class="learn-more">
                       Learn more
                       <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
@@ -1456,21 +1483,25 @@
                             <path d="M8 16l6 6 10-12" />
                           </svg>
                         </button>
-                        <pre><code class="language-python">@mellea.generative
-def classify_sentiment(text: str) -> Literal["positive", "negative"]:
-  """Classify the sentiment of the input text as 'positive' or 'negative'."""
+                        <pre><code class="language-python">from typing import Literal
+from pydantic import BaseModel
+from mellea import generative
 
-sentiment = classify_sentiment(m, text=customer_review)
+class ReviewAnalysis(BaseModel):
+    sentiment: Literal["positive", "negative", "neutral"]
+    score: int    # 1-5
+    summary: str  # one sentence
 
-if sentiment == "positive":
-    msg = m.instruct("Thank the customer for their post")
-else:
-    msg = m.instruct(
-       description="Apologize for the customer's negative experience and offer a 5% discount for their next visit",
-       grounding_context={"review": customer_review}
-    )
+@generative
+def analyze_review(text: str) -> ReviewAnalysis:
+    """Extract sentiment, a 1-5 score, and a one-sentence summary."""
+    ...
 
-post_response(msg)</code></pre>
+result = analyze_review(m, text="Battery life is great but the screen is dim")
+
+print(result.sentiment)  # "positive", "negative", or "neutral" — always
+print(result.score)      # an int, 1-5 — always
+print(result.summary)    # a str — always</code></pre>
                       </div>
                     </div>
                   </div>
@@ -1488,7 +1519,7 @@ post_response(msg)</code></pre>
                     <p class="accordion-description">Add requirements to any LLM call. Mellea validates outputs and
                       retries automatically — swap between rejection sampling, majority voting, and more with one
                       parameter.</p>
-                    <a href="https://docs.mellea.ai/overview/requirements" target="_blank" rel="noreferrer"
+                    <a href="https://docs.mellea.ai/concepts/instruct-validate-repair" target="_blank" rel="noreferrer"
                       class="learn-more">
                       Learn more
                       <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
@@ -1543,7 +1574,7 @@ def write_email_with_strategy(m: mellea.MelleaSession, name: str, notes: str) ->
                   </button>
                   <div class="accordion-content">
                     <p class="accordion-description">Add LLM query capabilities to any existing Python class with a single decorator. No rewrites, no wrappers.</p>
-                    <a href="https://docs.mellea.ai/core-concept/mobjects" target="_blank" rel="noreferrer"
+                    <a href="https://docs.mellea.ai/concepts/mobjects-and-mify" target="_blank" rel="noreferrer"
                       class="learn-more">
                       Learn more
                       <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
@@ -1562,34 +1593,16 @@ def write_email_with_strategy(m: mellea.MelleaSession, name: str, notes: str) ->
                             <path d="M8 16l6 6 10-12" />
                           </svg>
                         </button>
-                        <pre><code class="language-python">import mellea
-from mellea.stdlib.mify import mify, MifiedProtocol
-import pandas
-from io import StringIO
+                        <pre><code class="language-python">from mellea.stdlib.components.mify import mify
 
+@mify
+class Customer:
+    def __init__(self, name: str, last_purchase: str) -> None:
+        self.name = name
+        self.last_purchase = last_purchase
 
-@mify(fields_include={"table"}, template="{{ table }}")
-class MyCompanyDatabase:
-  table: str = """| Store      | Sales   |
-                    | ---------- | ------- |
-                    | Northeast  | $250    |
-                    | Southeast  | $80     |
-                    | Midwest    | $420    |"""
-
-  def transpose(self):
-    pandas.read_csv(
-      StringIO(self.table),
-      sep='|',
-      skipinitialspace=True,
-      header=0,
-      index_col=False
-    )
-
-
-m = mellea.start_session()
-db = MyCompanyDatabase()
-assert isinstance(db, MifiedProtocol)
-answer = m.query(db, "What were sales for the Northeast branch this month?")
+customer = Customer("Alice", "noise-cancelling headphones")
+answer = m.query(customer, "What would Alice enjoy as a follow-up gift?")
 print(str(answer))</code></pre>
                       </div>
                     </div>
@@ -1610,21 +1623,25 @@ print(str(answer))</code></pre>
                       <path d="M8 16l6 6 10-12" />
                     </svg>
                   </button>
-                  <pre><code class="language-python" id="desktop-code">@mellea.generative
-def classify_sentiment(text: str) -> Literal["positive", "negative"]:
-  """Classify the sentiment of the input text as 'positive' or 'negative'."""
+                  <pre><code class="language-python" id="desktop-code">from typing import Literal
+from pydantic import BaseModel
+from mellea import generative
 
-sentiment = classify_sentiment(m, text=customer_review)
+class ReviewAnalysis(BaseModel):
+    sentiment: Literal["positive", "negative", "neutral"]
+    score: int    # 1-5
+    summary: str  # one sentence
 
-if sentiment == "positive":
-    msg = m.instruct("Thank the customer for their post")
-else:
-    msg = m.instruct(
-       description="Apologize for the customer's negative experience and offer a 5% discount for their next visit",
-       grounding_context={"review": customer_review}
-    )
+@generative
+def analyze_review(text: str) -> ReviewAnalysis:
+    """Extract sentiment, a 1-5 score, and a one-sentence summary."""
+    ...
 
-post_response(msg)</code></pre>
+result = analyze_review(m, text="Battery life is great but the screen is dim")
+
+print(result.sentiment)  # "positive", "negative", or "neutral" — always
+print(result.score)      # an int, 1-5 — always
+print(result.summary)    # a str — always</code></pre>
                 </div>
               </div>
 
@@ -1670,21 +1687,25 @@ post_response(msg)</code></pre>
     // CODE SNIPPETS DATA - Edit these to change code examples
     // ==========================================================================
     const CODE_SNIPPETS = {
-      'generative-slots': `@mellea.generative
-def classify_sentiment(text: str) -> Literal["positive", "negative"]:
-  """Classify the sentiment of the input text as 'positive' or 'negative'."""
+      'generative-functions': `from typing import Literal
+from pydantic import BaseModel
+from mellea import generative
 
-sentiment = classify_sentiment(m, text=customer_review)
+class ReviewAnalysis(BaseModel):
+    sentiment: Literal["positive", "negative", "neutral"]
+    score: int    # 1-5
+    summary: str  # one sentence
 
-if sentiment == "positive":
-    msg = m.instruct("Thank the customer for their post")
-else:
-    msg = m.instruct(
-       description="Apologize for the customer's negative experience and offer a 5% discount for their next visit",
-       grounding_context={"review": customer_review}
-    )
+@generative
+def analyze_review(text: str) -> ReviewAnalysis:
+    """Extract sentiment, a 1-5 score, and a one-sentence summary."""
+    ...
 
-post_response(msg)`,
+result = analyze_review(m, text="Battery life is great but the screen is dim")
+
+print(result.sentiment)  # "positive", "negative", or "neutral" — always
+print(result.score)      # an int, 1-5 — always
+print(result.summary)    # a str — always`,
 
       'instruct-validate-repair': `import mellea
 from mellea.stdlib.sampling import RejectionSamplingStrategy
@@ -1708,34 +1729,16 @@ def write_email_with_strategy(m: mellea.MelleaSession, name: str, notes: str) ->
     print("Expect sub-par result.")
     return email_candidate.sample_generations[0].value`,
 
-      'mobjects': `import mellea
-from mellea.stdlib.mify import mify, MifiedProtocol
-import pandas
-from io import StringIO
+      'mobjects': `from mellea.stdlib.components.mify import mify
 
+@mify
+class Customer:
+    def __init__(self, name: str, last_purchase: str) -> None:
+        self.name = name
+        self.last_purchase = last_purchase
 
-@mify(fields_include={"table"}, template="{{ table }}")
-class MyCompanyDatabase:
-  table: str = """| Store      | Sales   |
-                    | ---------- | ------- |
-                    | Northeast  | $250    |
-                    | Southeast  | $80     |
-                    | Midwest    | $420    |"""
-
-  def transpose(self):
-    pandas.read_csv(
-      StringIO(self.table),
-      sep='|',
-      skipinitialspace=True,
-      header=0,
-      index_col=False
-    )
-
-
-m = mellea.start_session()
-db = MyCompanyDatabase()
-assert isinstance(db, MifiedProtocol)
-answer = m.query(db, "What were sales for the Northeast branch this month?")
+customer = Customer("Alice", "noise-cancelling headphones")
+answer = m.query(customer, "What would Alice enjoy as a follow-up gift?")
 print(str(answer))`
     };
 
