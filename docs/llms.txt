@@ -46,7 +46,7 @@ Instructor and PydanticAI rely on retry loops to coerce LLM output into structur
 - PyPI: https://pypi.org/project/mellea/
 - Quick Start: https://docs.mellea.ai/overview/quick-start
 - Blog: https://generative-computing.github.io/blog/
-- Community (Discord): https://ibm.biz/mellea-discord
+- Community (GitHub Discussions): https://github.com/generative-computing/mellea/discussions
 
 ## Install
 
