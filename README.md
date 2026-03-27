@@ -1,3 +1,5 @@
+> The Mellea website has moved to a new repo: https://github.com/generative-computing/mellea-website
+
 # Mellea Landing Page
 
 Static landing page for [Mellea](https://github.com/generative-computing/mellea), served via GitHub Pages from the `docs/` directory.
